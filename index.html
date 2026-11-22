@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Public Transport Feedback Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LOGIN PAGE -->
+    <section id="loginPage" class="login-page">
+        <div class="login-card">
+            <div class="logo">🚌</div>
+            <h1>Transport Feedback Portal</h1>
+            <p>Share your experience. Help us improve public transport.</p>
+
+            <form id="loginForm">
+                <label>Your Name</label>
+                <input type="text" id="userName" placeholder="Enter your name" required>
+
+                <label>Password</label>
+                <input type="password" id="userPassword"
+                       placeholder="Enter your password" required>
+
+                <button type="submit" class="primary-btn">Login</button>
+                
+                <p id="loginError" class="error-message"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- MAIN WEBSITE -->
+    <div id="mainApp" class="app hidden">
+
+        <aside class="sidebar">
+            <div class="side-logo">🚌 Transport Portal</div>
+
+            <div class="user-info">
+                <div class="avatar">👤</div>
+                <div>
+                    <strong id="displayName">User</strong>
+                    <small>Welcome!</small>
+                </div>
+            </div>
+
+            <nav>
+                <button class="nav-btn active" data-page="dashboard">🏠 Dashboard</button>
+                <button class="nav-btn" data-page="feedback">📝 Give Feedback</button>
+                <button class="nav-btn" data-page="status">📋 Feedback Status</button>
+                <button class="nav-btn" data-page="analytics">📊 Analytics</button>
+                <button class="nav-btn" data-page="reports">📄 Reports</button>
+            </nav>
+
+            <button id="logoutBtn" class="logout-btn">↪ Logout</button>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <h2 id="pageTitle">Dashboard</h2>
+                    <p>Local Public Transport Feedback Portal</p>
+                </div>
+                <div class="top-user">👤 <span id="topUserName"></span></div>
+            </header>
+
+            <!-- DASHBOARD -->
+            <section id="dashboardPage" class="page">
+                <div class="welcome">
+                    <div>
+                        <h1>Welcome to Transport Portal 👋</h1>
+                        <p>Every feedback helps make public transport better for everyone.</p>
+                    </div>
+                    <button class="primary-btn" data-go="feedback">+ Give Feedback</button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <p>Total Feedback</p>
+                        <h2 id="totalCount">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏳</div>
+                        <p>Pending</p>
+                        <h2 id="pendingCount">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚙️</div>
+                        <p>In Progress</p>
+                        <h2 id="progressCount">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <p>Resolved</p>
+                        <h2 id="resolvedCount">0</h2>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>Recent Feedback</h3>
+                    <div id="recentFeedback" class="feedback-list"></div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span>♿</span>
+                        <h3>Accessibility for All</h3>
+                        <p>Share problems related to ramps, reserved seating, announcements and other accessibility needs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span>🛡️</span>
+                        <h3>Safer Journeys</h3>
+                        <p>Report safety concerns, overcrowding and uncomfortable travel experiences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span>🌍</span>
+                        <h3>Better Transport</h3>
+                        <p>Help improve cleanliness, punctuality and public transport services.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FEEDBACK FORM -->
+            <section id="feedbackPage" class="page hidden">
+                <div class="section-heading">
+                    <h1>Share Your Feedback</h1>
+                    <p>Tell us about your public transport experience.</p>
+                </div>
+
+                <form id="feedbackForm" class="content-card">
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Transport Type *</label>
+                            <select id="transportType" required>
+                                <option value="">Select transport</option>
+                                <option>City Bus</option>
+                                <option>Local Bus</option>
+                                <option>Metro</option>
+                                <option>Train</option>
+                                <option>Auto Rickshaw</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Route Number / Name *</label>
+                            <input type="text" id="route" placeholder="Example: Bus Route 12" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bus Stop / Station *</label>
+                            <input type="text" id="stop" placeholder="Enter stop or station" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Travel Date *</label>
+                            <input type="date" id="travelDate" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Issue Category *</label>
+                            <select id="category" required>
+                                <option value="">Select issue category</option>
+                                <option>Delay / Late Arrival</option>
+                                <option>Cleanliness</option>
+                                <option>Driver Behaviour</option>
+                                <option>Overcrowding</option>
+                                <option>Safety and Security</option>
+                                <option>Accessibility for Disabled Passengers</option>
+                                <option>Accessibility for Elderly People</option>
+                                <option>Women and Child Safety</option>
+                                <option>Staff Behaviour</option>
+                                <option>Ticket / Fare Problem</option>
+                                <option>Facilities at Bus Stop</option>
+                                <option>Suggestion</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Your Rating *</label>
+                            <div class="stars" id="starRating">
+                                <button type="button" data-rating="1">★</button>
+                                <button type="button" data-rating="2">★</button>
+                                <button type="button" data-rating="3">★</button>
+                                <button type="button" data-rating="4">★</button>
+                                <button type="button" data-rating="5">★</button>
+                            </div>
+                            <small id="ratingText">Select your rating</small>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Describe Your Feedback *</label>
+                            <textarea id="message" rows="5"
+                                placeholder="Write your complaint or suggestion..." required></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Upload Photo or PDF (Optional)</label>
+                            <input type="file" id="attachment" accept="image/*,.pdf">
+                            <small>Maximum file size: 2 MB</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="primary-btn">Submit Feedback</button>
+                    <p id="feedbackMessage" class="success-message"></p>
+                </form>
+            </section>
+
+            <!-- STATUS PAGE -->
+            <section id="statusPage" class="page hidden">
+                <div class="section-heading">
+                    <h1>Feedback Status</h1>
+                    <p>Check the progress of submitted feedback.</p>
+                </div>
+
+                <div class="filter-row">
+                    <input type="text" id="searchFeedback" placeholder="Search by route, name or ID...">
+                    <select id="statusFilter">
+                        <option value="All">All Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+                </div>
+
+                <div id="allFeedback" class="feedback-list"></div>
+            </section>
+
+            <!-- ANALYTICS -->
+            <section id="analyticsPage" class="page hidden">
+                <div class="section-heading">
+                    <h1>Feedback Analytics</h1>
+                    <p>Overview of passenger feedback and service performance.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <p>Average Rating</p>
+                        <h2 id="averageRating">0 ★</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Resolution Rate</p>
+                        <h2 id="resolutionRate">0%</h2>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="content-card">
+                        <h3>Feedback by Status</h3>
+                        <div id="statusChart"></div>
+                    </div>
+                    <div class="content-card">
+                        <h3>Feedback by Category</h3>
+                        <div id="categoryChart"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- REPORTS -->
+            <section id="reportsPage" class="page hidden">
+                <div class="section-heading">
+                    <h1>Reports</h1>
+                    <p>Download feedback information for project records.</p>
+                </div>
+
+                <div class="content-card report-card">
+                    <div class="report-icon">📊</div>
+                    <h2>Feedback Report</h2>
+                    <p>Export all feedback records, ratings, categories and statuses into a CSV file.</p>
+                    <button id="downloadReport" class="primary-btn">⬇ Download CSV Report</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
